@@ -1,0 +1,6 @@
+logs/
+.env
+artifacts/
+local_data/
+venv/
+*.log

@@ -1,0 +1,14 @@
+mlflow
+dvc
+dagshub
+pandas
+scikit-learn
+pyyaml
+pathlib
+numpy
+ipykernel
+python-dotenv
+pymongo
+fastapi
+uvicorn
+pymongo[srv]
