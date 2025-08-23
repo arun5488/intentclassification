@@ -12,3 +12,6 @@ pymongo
 fastapi
 uvicorn
 pymongo[srv]
+requests
+dataclasses
+python-box

@@ -1,0 +1,6 @@
+columns:
+  - Test case ID
+  - Steps
+  - Expected Results
+  - predicted
+  - Class

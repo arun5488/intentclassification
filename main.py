@@ -1,22 +1,25 @@
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-from dotenv import load_dotenv
-import pandas as pd
-from dotenv import load_dotenv
-import os
+from src.IntentClassification.pipeline.data_ingestion_pipeline import DataIngestionPipeline
+from src.IntentClassification.pipeline.data_validation_pipeline import DataValidationPipeline
+from src.IntentClassification import logger
 
-load_dotenv()
+# STAGE_NAME = "Data Ingestion Pipeline"
 
-if __name__=="__main__":
-    MONGO_DB_CLIENT = os.getenv("MONGO_DB_URL")
-    print(MONGO_DB_CLIENT)
-    # Create a new client and connect to the server
-    client = MongoClient(MONGO_DB_CLIENT, server_api=ServerApi('1'))
+# try:
+#     logger.info(f"Starting {STAGE_NAME}")
+#     data_ingestion = DataIngestionPipeline()
+#     data_ingestion.initiate_data_ingestion()
+#     logger.info(f"completed {STAGE_NAME} successfully")
+# except Exception as e:
+#     logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+#     raise e
 
-    # Send a ping to confirm a successful connection
-    try:
-        client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
-    except Exception as e:
-        print(e)
+STAGE_NAME = "Data Validation Pipeline"
 
+try:
+    logger.info(f"Starting {STAGE_NAME}")
+    data_validation = DataValidationPipeline()
+    data_validation.initiate_data_validation()
+    logger.info(f"completed {STAGE_NAME} successfully")
+except Exception as e:
+    logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+    raise e

@@ -1,0 +1,33 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  dataset_file_name: artifacts/data_ingestion/intent_classification.csv
+  database_name: intent_classification
+  collection_name: intents
+  intents_file_name: artifacts/data_ingestion/intents.csv
+  intent_column: predicted
+
+data_validation:
+  root_dir: artifacts/data_validation
+  schema: columns
+  dataset_file_name: artifacts/data_ingestion/intent_classification.csv
+  validated_file_name: artifacts/data_validation/validated.csv
+
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  dataset_file_name: artifacts/data_validation/validated.csv
+  preprocessed_file_name: artifacts/data_preprocessing/preprocessed.csv
+  named_entities: named_entities.yaml
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  glove_url: http://nlp.stanford.edu/data/glove.6B.zip
+  glove_zip_file: artifacts/data_transformation/glove.6B.zip
+  glove_dir: artifacts/data_transformation/glove.6B
+  dataset_file_name: artifacts/data_preprocessing/preprocessed.csv
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  trained_model_file: artifacts/model_trainer/trained_model.pkl
+  tokenizer_file: artifacts/model_trainer/tokenizer.pkl
