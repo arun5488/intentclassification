@@ -1,4 +1,4 @@
-from src.IntentClassification.entity import (DataIngestionConfig, DataValidationConfig)
+from src.IntentClassification.entity import (DataIngestionConfig, DataValidationConfig, DataPreProcessingConfig, DataTransformationConfig)
 from src.IntentClassification import logger
 from src.IntentClassification import constants as const
 from src.IntentClassification.utils.common import *
@@ -9,11 +9,8 @@ class ConfigurationManager:
                  schema_file_path = const.SCHEMA_FILE_PATH):
         logger.info("Created Instance of ConfigurationManager")
         self.config = read_yaml(config_file_path)
-        logger.info(f"Loaded config: {self.config}")
         self.params = read_yaml(param_file_path)
-        logger.info(f"Loaded params: {self.params}")
         self.schema = read_yaml(schema_file_path)
-        logger.info(f"Loaded schema: {self.schema}")
 
         create_directories([self.config.artifacts_root])
     
@@ -43,4 +40,36 @@ class ConfigurationManager:
             schema = schema,
             dataset_file_name = config.dataset_file_name,
             validated_file_name = config.validated_file_name
+        )
+    
+    def get_data_preprocessing_config(self) -> DataPreProcessingConfig:
+        logger.info("Obtaining Data Preprocessing Config")
+        config = self.config.data_preprocessing
+        named_entities = self.params
+        logger.info(f"Named entities: {named_entities}")
+
+        create_directories([Path(config.root_dir)])
+        return DataPreProcessingConfig(
+            root_dir = Path(config.root_dir),
+            dataset_file_name = config.dataset_file_name,
+            preprocessed_file_name = config.preprocessed_file_name,
+            named_entities = named_entities
+        )
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        logger.info("Obtaining Data Transformation Config")
+        config = self.config.data_transformation
+        create_directories([Path(config.root_dir)])
+
+        return DataTransformationConfig(
+            root_dir = Path(config.root_dir),
+            glove_url = config.glove_url,
+            glove_zip_file = config.glove_zip_file,
+            glove_dir = Path(config.glove_dir),
+            dataset_file_name = config.dataset_file_name,
+            train_file = config.train_file,
+            test_file = config.test_file,
+            train_test_ratio = config.train_test_ratio,
+            glove_file = config.glove_file,
+            word2vec_model = config.word2vec_model
         )

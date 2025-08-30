@@ -1,1 +1,41 @@
-key: value
+named_entities:
+  "checking account": checking_account
+  "savings account": savings_account
+  "external account": external_account
+  "account freeze": account_freeze
+  "credit block": credit_block
+  "debit block": debit_block
+  " td account": " td_account"
+  "term deposit account": term_deposit_account
+  "customer id": customer_id
+  "ira plan": ira_plan
+  "ira account": ira_account
+  
+
+replace_words:
+  arrangement: account
+  chq: check
+  cntrctamt: contract amount
+  bor: back_office_report
+  "pos ": "point_of_sale "
+  typ: type
+  principalandavailableinterest: principal and available interest
+  paybycheck: pay by check
+  transfertoaccount: transfer to account
+  withdrawalpymtmode: withdrawal payment mode
+  rlttyp: relationship type
+  artyp: account type
+  entprsartyp: enterprise account type
+  transferwithdrawalamount: transfer withdrawal amount
+  cashdeposit: cash deposit
+  pmttyp: payment type
+  origamt: original amount
+  termdeposit: term deposit
+  pststdcde: post standard code
+  crncycde: currency code
+  arid: account id
+  acctclosflg: account close flag
+  pmttypdebit: payment type debit
+  kafkaevent: kafka event
+
+

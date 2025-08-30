@@ -18,14 +18,19 @@ data_preprocessing:
   root_dir: artifacts/data_preprocessing
   dataset_file_name: artifacts/data_validation/validated.csv
   preprocessed_file_name: artifacts/data_preprocessing/preprocessed.csv
-  named_entities: named_entities.yaml
+  named_entities: named_entities
 
 data_transformation:
   root_dir: artifacts/data_transformation
   glove_url: http://nlp.stanford.edu/data/glove.6B.zip
-  glove_zip_file: artifacts/data_transformation/glove.6B.zip
-  glove_dir: artifacts/data_transformation/glove.6B
+  glove_zip_file: artifacts/data_transformation/glove/glove.6B.zip
+  glove_dir: artifacts/data_transformation/glove
+  glove_file: artifacts/data_transformation/glove/glove.6B.100d.txt
   dataset_file_name: artifacts/data_preprocessing/preprocessed.csv
+  train_file: artifacts/data_transformation/train.csv
+  test_file: artifacts/data_transformation/test.csv
+  train_test_ratio: 0.8
+  word2vec_model: artifacts/data_transformation/word2vec.model
 
 model_trainer:
   root_dir: artifacts/model_trainer
