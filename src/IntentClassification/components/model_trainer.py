@@ -11,7 +11,7 @@ import numpy as np
 import mlflow, dagshub, tempfile
 from dotenv import load_dotenv
 from src.IntentClassification import constants as const
-from src.IntentClassification.utils.common import create_directories
+from src.IntentClassification.utils.common import create_directories, save_object, load_object
 from pathlib import Path
 
 class ModelTrainer:
@@ -137,6 +137,8 @@ class ModelTrainer:
                 pickle.dump(best_model, f)
             logger.info(f"model saved at: {self.config.trained_model_file}")
 
+            save_object(const.DVC_TRAINED_MODEL, best_model)
+
         except Exception as e:
             logger.error(f"Error in train_model: {e}")
             raise e
@@ -158,6 +160,10 @@ class ModelTrainer:
             y_train.to_csv(const.DVC_Y_TRAIN, index=False)
             y_test.to_csv(const.DVC_Y_TEST, index=False)
 
+            idf_scores = load_object('artifacts/data_transformation/idf_scores.pkl')
+            save_object(const.DVC_IDF_SCORES, idf_scores)
+            tfidf = load_object('artifacts/data_transformation/tfidf_vectorizer.pkl')
+            save_object(const.DVC_TFIDF_VECTORIZER, tfidf)
 
             self.train_model(X_train, X_test, y_train, y_test)
         except Exception as e:

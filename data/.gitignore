@@ -2,3 +2,6 @@
 /X_train.npy
 /y_train.csv
 /y_test.csv
+/idf_scores.pkl
+/tfidf_vectorizer.pkl
+/trained_model.pkl

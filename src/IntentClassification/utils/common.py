@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from src.IntentClassification import logger
+import pickle
 
 def read_yaml(file_path: Path) -> ConfigBox:
     logger.info("Inside read_yaml method")
@@ -41,4 +42,28 @@ def connect_to_mongodb():
         return client
     except Exception as e:
         logger.error(f"Error connecting to MongoDB: {e}")
+        raise e
+
+def save_object(file_path, obj):
+    try:
+        logger.info("Inside save_object method")
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            pickle.dump(obj, file_obj)
+        logger.info(f"file saved in {file_path}")
+    except Exception as e:
+        logger.error(f"Error observed in save_object method:{e}")
+        raise e
+
+def load_object(file_path):
+    try:
+        logger.info("Inside file_path metod")
+        if not os.path.exists(file_path):
+            logger.info(f"file path {file_path} doesnot exist")
+        else:
+            with open(file_path, "rb") as file:
+                return pickle.load(file)
+            logger.info(f"file loaded succesfully from path {file_path}")
+    except Exception as e:
+        logger.error(f"error inside load_object:{e}")
         raise e
