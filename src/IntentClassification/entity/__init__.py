@@ -36,3 +36,19 @@ class DataTransformationConfig:
     train_test_ratio: float
     glove_file: str
     word2vec_model: str
+    tfidf_vectorizer_path: str
+    idf_scores_path: str
+    trained_word2vec_model_path: str
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    trained_model_file: str
+    word2vec_model: str
+    tfidf_vectorizer_path: str
+    idf_scores_path: str
+    train_file: str
+    test_file: str
+    model_accuracy_baseline: float
+    decision_tree_parameters: dict
+    rf_params: dict

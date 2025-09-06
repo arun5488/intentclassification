@@ -31,8 +31,17 @@ data_transformation:
   test_file: artifacts/data_transformation/test.csv
   train_test_ratio: 0.8
   word2vec_model: artifacts/data_transformation/word2vec.model
+  tfidf_vectorizer_path: artifacts/data_transformation/tfidf_vectorizer.pkl
+  idf_scores_path: artifacts/data_transformation/idf_scores.pkl
+  trained_word2vec_model_path: artifacts/data_transformation/trained_word2vec.model
 
 model_trainer:
   root_dir: artifacts/model_trainer
   trained_model_file: artifacts/model_trainer/trained_model.pkl
-  tokenizer_file: artifacts/model_trainer/tokenizer.pkl
+  word2vec_model: artifacts/data_transformation/word2vec.model
+  tfidf_vectorizer_path: artifacts/data_transformation/tfidf_vectorizer.pkl
+  idf_scores_path: artifacts/data_transformation/idf_scores.pkl
+  train_file: artifacts/data_transformation/train.csv
+  test_file: artifacts/data_transformation/test.csv
+  model_accuracy_baseline: 0.6
+

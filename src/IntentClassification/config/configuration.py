@@ -1,4 +1,4 @@
-from src.IntentClassification.entity import (DataIngestionConfig, DataValidationConfig, DataPreProcessingConfig, DataTransformationConfig)
+from src.IntentClassification.entity import (DataIngestionConfig, DataValidationConfig, DataPreProcessingConfig, DataTransformationConfig, ModelTrainerConfig)
 from src.IntentClassification import logger
 from src.IntentClassification import constants as const
 from src.IntentClassification.utils.common import *
@@ -71,5 +71,28 @@ class ConfigurationManager:
             test_file = config.test_file,
             train_test_ratio = config.train_test_ratio,
             glove_file = config.glove_file,
-            word2vec_model = config.word2vec_model
+            word2vec_model = config.word2vec_model,
+            tfidf_vectorizer_path = config.tfidf_vectorizer_path,
+            idf_scores_path = config.idf_scores_path,
+            trained_word2vec_model_path = config.trained_word2vec_model_path
+        )
+    
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        logger.info("Obtaining Model Trainer Config")
+        config = self.config.model_trainer
+        params = self.params
+
+        create_directories([Path(config.root_dir)])
+
+        return ModelTrainerConfig(
+            root_dir = Path(config.root_dir),
+            trained_model_file = config.trained_model_file,
+            word2vec_model = config.word2vec_model,
+            tfidf_vectorizer_path = config.tfidf_vectorizer_path,
+            idf_scores_path = config.idf_scores_path,
+            train_file = config.train_file,
+            test_file = config.test_file,
+            model_accuracy_baseline = config.model_accuracy_baseline,
+            decision_tree_parameters = params.decision_tree,
+            rf_params = params.random_forest
         )

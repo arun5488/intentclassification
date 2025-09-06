@@ -18,3 +18,4 @@ python-box
 nltk
 bs4
 gensim
+dvc-s3

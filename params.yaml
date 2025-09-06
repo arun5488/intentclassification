@@ -38,4 +38,17 @@ replace_words:
   pmttypdebit: payment type debit
   kafkaevent: kafka event
 
+decision_tree:
+  max_depth: [3,5]
+  min_samples_split: [3,5,7]
+  min_samples_leaf: [1,2]
+  criterion: [gini]
+
+
+random_forest:
+  n_estimators: [100,200]
+  max_depth: [3,5,7]
+  min_samples_split: [3,5,7]
+  min_samples_leaf: [1,2]
+  criterion: [gini]
 

@@ -10,6 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 import numpy as np
 from nltk.tokenize import word_tokenize
+import pickle
 
 
 class DataTransformation: 
@@ -22,6 +23,10 @@ class DataTransformation:
 
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(self.corpus)
         self.idf_scores = dict(zip(self.tfidf_vectorizer.get_feature_names_out(),self.tfidf_vectorizer.idf_))
+        # word to vec model
+        self.tokenize_corpus = [word_tokenize(text) for text in self.corpus]
+        self.word2vec_model = Word2Vec(sentences=self.tokenize_corpus, vector_size=100, window=5, min_count=1, workers=4)
+
     
     def download_glove_embeddings(self):
         logger.info("Inside download_glove_embeddings method")
@@ -62,16 +67,23 @@ class DataTransformation:
     def tokenize_corpus(self):
         logger.info("Inside tokenize_corpus method")
         return [word_tokenize(text) for text in self.corpus]
+    
 
-    def save_word2vec_model(self):
-        logger.info("Inside save_word2vec_model method")
-        model_path = self.config.word2vec_model
-        model = Word2Vec(sentences=self.tokenize_corpus(), vector_size=100, window=5, min_count=1, workers=4)
-        model.save(model_path)
 
     def load_word2vec_model(self):
         logger.info("Inside load_word2vec_model method")
         return Word2Vec.load(self.config.word2vec_model)
+
+    def save_transform_artifacts(self):
+        logger.info("Inside save_transform_artifacts method")
+        #save td-idf vectorizer
+        with open(self.config.tfidf_vectorizer_path, 'wb') as f:
+            pickle.dump(self.tfidf_vectorizer, f)
+        #save idf_scores
+        with open(self.config.idf_scores_path, 'wb') as f:
+            pickle.dump(self.idf_scores, f)
+        #save word2vec model
+        self.word2vec_model.save(self.config.word2vec_model)
 
     def sentence_to_weighted_vectors(self, sentence, glove_embeddings, idf_scores, word2vec_model):
         logger.info("Inside sentence_to_weighted_vectors method")
@@ -96,12 +108,12 @@ class DataTransformation:
         logger.info("Inside transform_data method")
         self.download_glove_embeddings()
         embeddings = self.load_glove_embeddings()
-        self.save_word2vec_model()
         word2vec_model = self.load_word2vec_model()
         vectors = []
         logger.info(f"transforming {len(self.corpus)} sentences into vectors.")
         for sentence in self.corpus:
             vector = self.sentence_to_weighted_vectors(sentence, embeddings, self.idf_scores, word2vec_model)
+            
             vectors.append(vector)
         logger.info(f"Transformed {len(vectors)} sentences into vectors.")
         logger.info("Adding vectors as a column to the dataframe.")
@@ -115,3 +127,5 @@ class DataTransformation:
         logger.info(f"Saved train_df to {self.config.train_file}")
         test_df.to_csv(self.config.test_file, index=False)
         logger.info(f"Saved test_df to {self.config.test_file}")
+        self.save_transform_artifacts()
+        logger.info("Saved all transformation artifacts.")
