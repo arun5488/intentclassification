@@ -1,0 +1,5 @@
+outs:
+- md5: 76e5737803382324c5720fff69ab53ef
+  size: 37008
+  hash: md5
+  path: idf_scores.pkl
