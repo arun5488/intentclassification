@@ -5,3 +5,4 @@
 /idf_scores.pkl
 /tfidf_vectorizer.pkl
 /trained_model.pkl
+/glove_embeddings.pkl

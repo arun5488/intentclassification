@@ -1,0 +1,5 @@
+outs:
+- md5: eef5a4952926d912421970e97879b630
+  size: 177381711
+  hash: md5
+  path: glove_embeddings.pkl
