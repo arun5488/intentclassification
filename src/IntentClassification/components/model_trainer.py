@@ -138,6 +138,7 @@ class ModelTrainer:
             logger.info(f"model saved at: {self.config.trained_model_file}")
 
             save_object(const.DVC_TRAINED_MODEL, best_model)
+            
 
         except Exception as e:
             logger.error(f"Error in train_model: {e}")
@@ -166,6 +167,7 @@ class ModelTrainer:
             save_object(const.DVC_TFIDF_VECTORIZER, tfidf)
 
             self.train_model(X_train, X_test, y_train, y_test)
+            
         except Exception as e:
             logger.error(f"error occured inside initiate_model_trainer:{e}")
             raise e

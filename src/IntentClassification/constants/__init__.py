@@ -17,3 +17,9 @@ DVC_Y_TEST = "data/y_test.csv"
 DVC_IDF_SCORES = "data/idf_scores.pkl"
 DVC_TFIDF_VECTORIZER = "data/tfidf_vectorizer.pkl"
 DVC_TRAINED_MODEL = "data/trained_model.pkl"
+WORD2VEC_MODEL = "artifacts/data_transformation/word2vec.model"
+GLOVE_EMBEDDINGS = "data/glove_embeddings.pkl"
+
+#.env filepath
+FLASK_ENV = '.flaskenv'
+ENV = '.env'

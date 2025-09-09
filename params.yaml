@@ -37,6 +37,7 @@ replace_words:
   acctclosflg: account close flag
   pmttypdebit: payment type debit
   kafkaevent: kafka event
+  eventconsole: event console
 
 decision_tree:
   max_depth: [3,5]

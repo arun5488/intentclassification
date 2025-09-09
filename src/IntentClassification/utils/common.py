@@ -7,6 +7,8 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from src.IntentClassification import logger
 import pickle
+from src.IntentClassification import constants as const
+
 
 def read_yaml(file_path: Path) -> ConfigBox:
     logger.info("Inside read_yaml method")
@@ -14,8 +16,6 @@ def read_yaml(file_path: Path) -> ConfigBox:
         logger.info(f"Reading yaml file from path: {file_path}")
         with open(file_path) as file:
             content = yaml.safe_load(file)
-            logger.info(content)
-            logger.info(type(content))
             logger.info("yaml file loaded successfully")
             return ConfigBox(content)
     except Exception as e:
@@ -35,7 +35,9 @@ def create_directories(paths: list):
 def connect_to_mongodb():
     logger.info("inside connect_to_mongodb method")
     try:
-        load_dotenv()
+        logger.info(f"filepath = {const.ENV}")
+        load_dotenv(dotenv_path=const.ENV)
+        logger.info(f"{os.getenv('MONGO_DB_URL')}")
         client = MongoClient(os.getenv('MONGO_DB_URL'), server_api=ServerApi('1'))
         client.admin.command('ping')
         logger.info("Connected to MongoDB")
@@ -67,3 +69,4 @@ def load_object(file_path):
     except Exception as e:
         logger.error(f"error inside load_object:{e}")
         raise e
+

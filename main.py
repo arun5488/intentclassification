@@ -5,49 +5,49 @@ from src.IntentClassification.pipeline.data_transformation_pipeline import DataT
 from src.IntentClassification.pipeline.model_trainer_pipeline import ModelTrainerPipeline
 from src.IntentClassification import logger
 
-# STAGE_NAME = "Data Ingestion Pipeline"
+STAGE_NAME = "Data Ingestion Pipeline"
 
-# try:
-#     logger.info(f"Starting {STAGE_NAME}")
-#     data_ingestion = DataIngestionPipeline()
-#     data_ingestion.initiate_data_ingestion()
-#     logger.info(f"completed {STAGE_NAME} successfully")
-# except Exception as e:
-#     logger.error(f"Error occurred in {STAGE_NAME}: {e}")
-#     raise e
+try:
+    logger.info(f"Starting {STAGE_NAME}")
+    data_ingestion = DataIngestionPipeline()
+    data_ingestion.initiate_data_ingestion()
+    logger.info(f"completed {STAGE_NAME} successfully")
+except Exception as e:
+    logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+    raise e
 
-# STAGE_NAME = "Data Validation Pipeline"
+STAGE_NAME = "Data Validation Pipeline"
 
-# try:
-#     logger.info(f"Starting {STAGE_NAME}")
-#     data_validation = DataValidationPipeline()
-#     data_validation.initiate_data_validation()
-#     logger.info(f"completed {STAGE_NAME} successfully")
-# except Exception as e:
-#     logger.error(f"Error occurred in {STAGE_NAME}: {e}")
-#     raise e
+try:
+    logger.info(f"Starting {STAGE_NAME}")
+    data_validation = DataValidationPipeline()
+    data_validation.initiate_data_validation()
+    logger.info(f"completed {STAGE_NAME} successfully")
+except Exception as e:
+    logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+    raise e
 
-# STAGE_NAME = "Data Preprocessing Pipeline"
+STAGE_NAME = "Data Preprocessing Pipeline"
 
-# try:
-#     logger.info(f"Starting {STAGE_NAME}")
-#     data_preprocessing = DataPreProcessingPipeline()
-#     data_preprocessing.initiate_data_preprocessing()
-#     logger.info(f"completed {STAGE_NAME} successfully")
-# except Exception as e:
-#     logger.error(f"Error occurred in {STAGE_NAME}: {e}")
-#     raise e
+try:
+    logger.info(f"Starting {STAGE_NAME}")
+    data_preprocessing = DataPreProcessingPipeline()
+    data_preprocessing.initiate_data_preprocessing()
+    logger.info(f"completed {STAGE_NAME} successfully")
+except Exception as e:
+    logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+    raise e
 
-# STAGE_NAME = "Data Transformation Pipeline"
+STAGE_NAME = "Data Transformation Pipeline"
 
-# try:
-#     logger.info(f"Starting {STAGE_NAME}")
-#     data_transformation = DataTransformationPipeline()
-#     data_transformation.initiate_data_transformation()
-#     logger.info(f"completed {STAGE_NAME} successfully")
-# except Exception as e:
-#     logger.error(f"Error occurred in {STAGE_NAME}: {e}")
-#     raise e
+try:
+    logger.info(f"Starting {STAGE_NAME}")
+    data_transformation = DataTransformationPipeline()
+    data_transformation.initiate_data_transformation()
+    logger.info(f"completed {STAGE_NAME} successfully")
+except Exception as e:
+    logger.error(f"Error occurred in {STAGE_NAME}: {e}")
+    raise e
 
 STAGE_NAME = "Model Trainer Pipeline"
 

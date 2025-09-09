@@ -1,5 +1,7 @@
 from src.IntentClassification.entity import DataTransformationConfig
 from src.IntentClassification import logger
+from src.IntentClassification import constants as const
+from src.IntentClassification.utils.common import save_object
 import requests
 from zipfile import ZipFile
 from sklearn.model_selection import train_test_split
@@ -85,6 +87,8 @@ class DataTransformation:
         #save word2vec model
         self.word2vec_model.save(self.config.word2vec_model)
 
+    
+
     def sentence_to_weighted_vectors(self, sentence, glove_embeddings, idf_scores, word2vec_model):
         logger.info("Inside sentence_to_weighted_vectors method")
         words = word_tokenize(sentence)
@@ -100,7 +104,6 @@ class DataTransformation:
                 vector += glove_embeddings[word]*weight
                 total_weight += weight
             else:
-                
                 vector += word_2_vec.wv[word]
         return vector / total_weight if total_weight != 0 else vector
     
@@ -129,3 +132,6 @@ class DataTransformation:
         logger.info(f"Saved test_df to {self.config.test_file}")
         self.save_transform_artifacts()
         logger.info("Saved all transformation artifacts.")
+
+        #save glove_embeddings
+        save_object(const.GLOVE_EMBEDDINGS, embeddings)
