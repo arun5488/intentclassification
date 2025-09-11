@@ -1,9 +1,5 @@
 from src.IntentClassification.pipeline.prediction_pipeline import PredictionPipeline
-from src.IntentClassification.pipeline.data_ingestion_pipeline import DataIngestionPipeline
-from src.IntentClassification.pipeline.data_validation_pipeline import DataValidationPipeline
-from src.IntentClassification.pipeline.data_preprocessing_pipeline import DataPreProcessingPipeline
-from src.IntentClassification.pipeline.data_transformation_pipeline import DataTransformationPipeline
-from src.IntentClassification.pipeline.model_trainer_pipeline import ModelTrainerPipeline
+from src.IntentClassification.pipeline.training_pipeline import TrainingPipeline
 from src.IntentClassification import logger
 from flask import Flask, render_template, url_for, request
 from dotenv import load_dotenv
@@ -26,16 +22,7 @@ def handle_action():
         if request.method == 'POST':
             if request.form.get('action') == 'train':
                 logger.info("Inside trainining of method POST")
-                logger.info("Data Ingestion Stage from app.py")
-                DataIngestionPipeline().initiate_data_ingestion()
-                logger.info("Data Validation Stage from app.py")
-                DataValidationPipeline().initiate_data_validation()
-                logger.info("Data Preprocessing Stage from app.py")
-                DataPreProcessingPipeline().initiate_data_preprocessing()
-                logger.info("Data Transformation Stage from app.py")
-                DataTransformationPipeline().initiate_data_transformation()
-                logger.info("Model Trainer stage from app.py")
-                ModelTrainerPipeline().initiate_model_trainer_pipeline()
+                TrainingPipeline().initiate_training_pipeline()
                 return render_template('train_success.html')
             elif request.form.get('action') == 'predict':
                 logger.info("loading page to capture sentence for prediction")

@@ -111,7 +111,7 @@ class DataTransformation:
         logger.info("Inside transform_data method")
         self.download_glove_embeddings()
         embeddings = self.load_glove_embeddings()
-        word2vec_model = self.load_word2vec_model()
+        word2vec_model = self.word2vec_model
         vectors = []
         logger.info(f"transforming {len(self.corpus)} sentences into vectors.")
         for sentence in self.corpus:

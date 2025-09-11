@@ -23,3 +23,6 @@ GLOVE_EMBEDDINGS = "data/glove_embeddings.pkl"
 #.env filepath
 FLASK_ENV = '.flaskenv'
 ENV = '.env'
+
+#AWS S3 configs
+TRAINING_BUCKET_NAME = "bsaarun54.intentclassification"
