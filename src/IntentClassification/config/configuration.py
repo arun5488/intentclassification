@@ -60,6 +60,7 @@ class ConfigurationManager:
         logger.info("Obtaining Data Transformation Config")
         config = self.config.data_transformation
         create_directories([Path(config.root_dir)])
+        create_directories([Path(const.DVC_FOLDER)])
 
         return DataTransformationConfig(
             root_dir = Path(config.root_dir),

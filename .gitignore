@@ -5,3 +5,4 @@ local_data/
 venv/
 *.log
 *.ipynb
+data/
