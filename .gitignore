@@ -2,7 +2,7 @@ logs/
 .env
 artifacts/
 local_data/
-venv/
+.venv/
 *.log
 *.ipynb
 data/
