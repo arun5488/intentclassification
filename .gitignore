@@ -6,3 +6,4 @@ venv/
 *.log
 *.ipynb
 data/
+"data/glove_embeddings.pkl" 
