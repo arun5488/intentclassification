@@ -45,6 +45,9 @@ jobs:
           echo "MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }}" >> .env
           # Add more variables as needed
 
+      - name: Show .env file content
+        run: cat .env
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
