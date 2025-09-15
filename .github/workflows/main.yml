@@ -96,10 +96,12 @@ jobs:
         run: |
          docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
          
-      #- name: Stop and remove  container if running
-       # run: |
-        # docker ps -q --filter "name=networksecurity" | grep -q . && docker stop networksecurity && docker rm -fv networksecurity
-       
+      - name: Stop and remove  container if running
+        run: |
+         docker ps -q --filter "name=intentclassification" | grep -q . && docker stop intentclassification && docker rm -fv intentclassification || echo "No container to stop"
+      - name: Clean previous images and containers
+        run: |
+         docker system prune -f      
       - name: Run Docker Image to serve users
         run: |
          docker run -d -p 8080:8080 --ipc="host" --name=intentclassification -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_ACCESS_SECRET_KEY=${{ secrets.AWS_ACCESS_SECRET_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
