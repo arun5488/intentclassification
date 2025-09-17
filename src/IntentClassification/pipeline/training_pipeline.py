@@ -57,6 +57,7 @@ class TrainingPipeline:
             logger.info(f"artifacts_root:{self.config.artifacts_root}")
             aws_bucket_url = f"s3://{const.TRAINING_BUCKET_NAME}/artifact/{self.config.artifacts_root}"
             self.s3_sync.sync_folder_from_s3(folder = self.config.artifacts_root,aws_bucket_url=aws_bucket_url)
+            logger.info(f"synced from s3 to local artifacts folder")
         except Exception as e:
             logger.error(f"error inside sync_s3_to_folder:{e}")
             raise e
@@ -68,14 +69,14 @@ class TrainingPipeline:
             self.sync_s3_to_artifacts_folder()
         else:
             logger.info(f"artifacts_root_folder doesnt exist, everything will be created from scratch")
-        logger.info("Data Ingestion Stage ")
-        DataIngestionPipeline().initiate_data_ingestion()
-        logger.info("Data Validation Stage ")
-        DataValidationPipeline().initiate_data_validation()
-        logger.info("Data Preprocessing Stage ")
-        DataPreProcessingPipeline().initiate_data_preprocessing()
-        logger.info("Data Transformation Stage ")
-        DataTransformationPipeline().initiate_data_transformation()
+        # logger.info("Data Ingestion Stage ")
+        # DataIngestionPipeline().initiate_data_ingestion()
+        # logger.info("Data Validation Stage ")
+        # DataValidationPipeline().initiate_data_validation()
+        # logger.info("Data Preprocessing Stage ")
+        # DataPreProcessingPipeline().initiate_data_preprocessing()
+        # logger.info("Data Transformation Stage ")
+        # DataTransformationPipeline().initiate_data_transformation()
         logger.info("Model Trainer stage ")
         ModelTrainerPipeline().initiate_model_trainer_pipeline()
 
