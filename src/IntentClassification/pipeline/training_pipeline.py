@@ -77,6 +77,7 @@ class TrainingPipeline:
         # DataPreProcessingPipeline().initiate_data_preprocessing()
         # logger.info("Data Transformation Stage ")
         # DataTransformationPipeline().initiate_data_transformation()
+        logger.info("try new")
         logger.info("Model Trainer stage ")
         ModelTrainerPipeline().initiate_model_trainer_pipeline()
 
