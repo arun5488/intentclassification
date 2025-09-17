@@ -1,2 +1,2 @@
 "# IntentClassification" 
-commiting from github 
+commit to run in ec2
