@@ -43,11 +43,14 @@ jobs:
 
       - name: Create .env file from secrets
         run: |
-          echo "MONGO_DB_URL=$(echo '${{ secrets.MONGO_DB_URL }}' | tr -d '\n')" >> .env
-          echo "MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}" >> .env
-          echo "MLFLOW_TRACKING_USERNAME=${{ secrets.MLFLOW_TRACKING_USERNAME }}" >> .env
-          echo "MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }}" >> .env
+          printf "MONGO_DB_URL=\"%s\"\n" "${{ secrets.MONGO_DB_URL }}" >> .env
+          printf "MLFLOW_TRACKING_URI=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_URI }}" >> .env
+          printf "MLFLOW_TRACKING_USERNAME=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_USERNAME }}" >> .env
+          printf "MLFLOW_TRACKING_PASSWORD=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_PASSWORD }}" >> .env
           # Add more variables as needed
+      - name: Verify .env structure
+        run: |
+          grep -E '^(MONGO_DB_URL|MLFLOW_TRACKING_URI|MLFLOW_TRACKING_USERNAME|MLFLOW_TRACKING_PASSWORD)=' .env | sed 's/=.*/=<masked>/'
 
       - name: Show .env file content
         run: cat .env
