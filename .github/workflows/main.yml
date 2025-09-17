@@ -39,18 +39,15 @@ jobs:
       - name: Debug MONGO_DB_URL
         run: |
           echo "Secret is: '${{ secrets.MONGO_DB_URL }}'"| sed 's/./& /g'
-          echo '${{ secrets.MONGO_DB_URL }}' | tr -d '\n'| sed 's/./& /g'
+          echo 'MONGO_DB_URL="mongodb+srv://${{ secrets.MONGO_DB_USERNAME }}:${{ secrets.MONGO_DB_PASSWORD }}@cluster0.dtiu1zd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"'
 
       - name: Create .env file from secrets
         run: |
-          printf "MONGO_DB_URL=\"%s\"\n" "${{ secrets.MONGO_DB_URL }}" >> .env
+          echo 'MONGO_DB_URL="mongodb+srv://${{ secrets.MONGO_DB_USERNAME }}:${{ secrets.MONGO_DB_PASSWORD }}@cluster0.dtiu1zd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"' >> .env
           printf "MLFLOW_TRACKING_URI=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_URI }}" >> .env
           printf "MLFLOW_TRACKING_USERNAME=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_USERNAME }}" >> .env
           printf "MLFLOW_TRACKING_PASSWORD=\"%s\"\n" "${{ secrets.MLFLOW_TRACKING_PASSWORD }}" >> .env
           # Add more variables as needed
-      - name: Verify .env structure
-        run: |
-          grep -E '^(MONGO_DB_URL|MLFLOW_TRACKING_URI|MLFLOW_TRACKING_USERNAME|MLFLOW_TRACKING_PASSWORD)=' .env | sed 's/=.*/=<masked>/'
 
       - name: Show .env file content
         run: cat .env
