@@ -83,7 +83,7 @@ class ModelTrainer:
 
                 test_model_score = accuracy_score(y_test, y_pred)
                 #MLFLOW tracking
-                self.track_mlflow(gs)
+                #self.track_mlflow(gs)
 
                 report[list(models.keys())[i]] = [test_model_score, best_params]
 
