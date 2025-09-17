@@ -1,7 +1,7 @@
 FROM python:3.12.11-slim
 WORKDIR /app
 COPY . .
-COPY .env.template .env
+#COPY .env.template .env
 
 RUN apt update -y && apt install awscli -y
 
