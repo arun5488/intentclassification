@@ -96,7 +96,7 @@ jobs:
          docker ps -q --filter "name=intentclassification" | grep -q . && docker stop intentclassification && docker rm -fv intentclassification || echo "No container to stop"
       - name: Clean previous images and containers
         run: |
-         docker system prune -f           
+         docker system prune -f        
       
       - name: Pull latest images
         run: |
